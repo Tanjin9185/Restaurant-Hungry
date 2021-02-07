@@ -1,12 +1,64 @@
-#foods{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 30px;
+.input-form{
+    font-family: FontAwesome;
+
 }
-.food{
+
+.nav-ancor{
+    font-weight: 700;
+    font-size: 16px;
+    
+}
+.tick-icon{
+    color: tomato;
+}
+.informations{
     border: 1px solid goldenrod;
-    border-radius: 20px;
-    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 50px;
+    padding: 30px 50px;
+    height: 40%;
+}
+
+.informations h1,.informations h5,.informations p{
+margin: 0px;
+}
+.info-image{
+    overflow: hidden;
+    height: 250px;
+    width: 100%;
+    border-radius: 10px;
+}
+.item-collums{
+    margin-bottom: 50px;
+    border-radius: 10px;
+    
+}
+.food-title{
+    height: 40px;
+    
+    
+}
+.card img{
+    height: 180px;
+    width: 100%;
+}
+.full-card{
+    border: 0px;
+    
+}
+.card-body{
+    background-color:#F8F7F5 ;
+    
+}
+#not-found-div{
+    display: none;
+}
+.not-found-text{
+    margin: 10px 10em;
+    /* border-radius: 10px; */
+    /* border: 1px solid black; */
+    background-color: greenyellow;
     text-align: center;
-    width: 200px;
+    color: black;
+    font-size: 30px;
 }

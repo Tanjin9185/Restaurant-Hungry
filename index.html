@@ -5,37 +5,76 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hungry</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-
+    <title>Hungry Monster</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h1>Hungry Master</h1>
-    <div class="container">
-        <form class="col-md-6 m-auto py-5">
-            <div class="input-group mb-3">
-                <input id="searchFood" type="text" class="form-control" placeholder="Search Food ...">
-                <div class="input-group-append">
-                    <button id="search" type="button" class="btn btn-danger">Search</button>
+    <header>
+        <section class="container">
+            <nav class="navbar navbar-expand-lg navbar-light nav-spacing">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+                        <img src="./images/logo.png" alt="">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                            <a class="nav-link active nav-ancor me-5" aria-current="page" href="#">Home</a>
+                            <a class="nav-link nav-ancor me-5" href="#">About</a>
+                            <a class="nav-link nav-ancor me-5" href="#">Recipes</a>
+                            <a class="nav-link nav-ancor me-5" href="#" tabindex="-1" aria-disabled="true">Blog</a>
+                        </div>
+                    </div>
                 </div>
+            </nav>
+        </section>
+    </header>
+
+    <main>
+        <div id="not-found-div">
+            <div class="div col-md-12">
+                <p class="text-center not-found-text"><i class="fa fa-times" aria-hidden="true"></i> Sorry, It is not
+                    available in our database!!!</p>
+
             </div>
-        </form>
-    </div>
+        </div>
+        <div class="container">
+            <form class="col-md-6 m-auto py-5">
+                <div class="input-group mb-3">
+                    <input id="search-input" type="search" class="form-control input-form"
+                        placeholder="&#xF002; Search for Meal ...">
+                    <div class="input-group-append">
+                        <button id="search-button" type="button" class="btn btn-danger">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <section id="ingredient-section" class="container">
 
-    <div id="foods">
-        
-    </div>
 
-    <!-- Bootstrap js -->
+        </section>
+
+        <section class="container">
+
+            <div id="food-items" class="row d-flex justify-content-center">
+
+            </div>
+        </section>
+
+    </main>
+
+    <script src="app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
         crossorigin="anonymous"></script>
-
-        <script src="app.js"></script>
-
 </body>
 
 </html>
