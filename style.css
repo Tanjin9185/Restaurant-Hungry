@@ -59,3 +59,7 @@ margin: 0px;
     color: black;
     font-size: 30px;
 }
+
+.footer{
+    display: flex;
+  }

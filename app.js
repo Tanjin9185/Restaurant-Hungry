@@ -11,7 +11,7 @@ document.getElementById("search").addEventListener("click", function () {
     document.getElementById("input").value = "";
 });
 
-
+//searchFoodItems Function
 const searchFoodItems = (items) => {
   const foodMeals = items.meals;
   if (foodMeals) {
@@ -46,7 +46,7 @@ const searchFoodItems = (items) => {
   }
 };
 
-
+//removeItem Function
 function removeItems() {
   document.getElementById("ingredient-section").innerText = "";
   const notFoundDiv = document.getElementById("not-found-div");
@@ -63,7 +63,7 @@ const ingredientInfo = (id) => {
     .then((data) => {
       const meal = data.meals[0];
       const foods = Object.keys(meal);
-      const strIngredientArray = [];
+      const ingredientArray = [];
       const strMeasureArray = [];
       foods.forEach((element) => {
         if (
@@ -71,7 +71,7 @@ const ingredientInfo = (id) => {
           meal[element] != null &&
           meal[element] != ""
         ) {
-          strIngredientArray.push(meal[element]);
+          ingredientArray.push(meal[element]);
         }
       });
 
@@ -86,7 +86,7 @@ const ingredientInfo = (id) => {
         }
       });
 
-      const showIngredientsSection = document.getElementById(
+      const showIngredient = document.getElementById(
         "ingredient-section");
       const ingredientItem = document.createElement("div");
 
@@ -107,12 +107,12 @@ const ingredientInfo = (id) => {
     
         `;
       ingredientItem.innerHTML = informationHtml;
-      showIngredientsSection.appendChild(ingredientItem);
+      showIngredient.appendChild(ingredientItem);
 
       const ingredientList = document.getElementById("ingredient-list");
       let ingredientInfo = " ";
 
-      strIngredientArray.forEach((ingredient, index) => {
+      ingredientArray.forEach((ingredient, index) => {
         const measure = strMeasureArray[index];
         console.log(measure, ingredient);
 
