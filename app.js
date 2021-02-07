@@ -1,156 +1,128 @@
-const searchBtn = document.getElementById('search-button');
-searchBtn.addEventListener('click', function(){
-    
-    const itemName = document.getElementById('search-input').value;
-    // console.log(itemName);
+// Search event
+document.getElementById("search").addEventListener("click", function () {
+  const itemName = document.getElementById("input").value;
 
-    fetch('https://www.themealdb.com/api/json/v1/1/search.php?s='+itemName)
-    .then(res => res.json())
-    .then(data => {
-        // console.log(data);
-        removePreviousItems();
-        addFoodItems(data);
+  fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=" + itemName)
+    .then((res) => res.json())
+    .then((data) => {
+      removeItems();
+      searchFoodItems(data);
+    });
+    document.getElementById("input").value = "";
+});
 
-    })
-    
-})
 
-const addFoodItems = items => {
-    // console.log(items.meals)
-    const foodMeals = items.meals;
-    if(items.meals){
-console.log(items.meals);
-        items.meals.forEach(item => {
-            // const item = foodMeals[i];
-            const itemName = item.strMeal;
-            const itemImg = item.strMealThumb;
-            const itemId = item.idMeal;
-            const mealItemDiv = document.createElement('div');
-            mealItemDiv.className = 'col-md-3 item-collums'
-            // style="width: 18rem;
-                    let cardHtml = `
-                    <div onclick="getIngredientsAndMeasure(${itemId})" class="card rounded-3 border-0" >
+const searchFoodItems = (items) => {
+  const foodMeals = items.meals;
+  if (foodMeals) {
+    items.meals.forEach((item) => {
+      const itemName = item.strMeal;
+      const itemImg = item.strMealThumb;
+      const itemId = item.idMeal;
+      const mealItemDiv = document.createElement("div");
+      mealItemDiv.className = "col-md-3 item-collums";
+
+      let foodHtml = `
+                    <div onclick="ingredientInfo(${itemId})" class="card rounded-3 border-0" >
                         <img src="${itemImg}" class="card-img-top" alt="...">
                         <div class="card-body">
-                          <h6 class="card-title food-title text-center">${itemName}</h6>
+                            <h6 class="card-title food-title text-center">${itemName}</h6>
                         </div>
                     </div>
                   
-                    `
-                    mealItemDiv.innerHTML = cardHtml;
-    
-            
-            const parentNode = document.getElementById('food-items');
-            parentNode.appendChild(mealItemDiv);
-        });
+                    `;
+      mealItemDiv.innerHTML = foodHtml;
 
-       
+      const parentNode = document.getElementById("food-items");
+      parentNode.appendChild(mealItemDiv);
+    });
+  }
+
+  else {
+    console.log("'not found'");
+
+    const notFoundDiv = document.getElementById("not-found-div");
+    notFoundDiv.style.display = "block";
+  }
+};
 
 
-    }
-    else{
-        console.log("'not found'")
-        
-        const notFoundDiv = document.getElementById("not-found-div");
-        notFoundDiv.style.display = 'block';
-    }
-    
+function removeItems() {
+  document.getElementById("ingredient-section").innerText = "";
+  const notFoundDiv = document.getElementById("not-found-div");
+  notFoundDiv.style.display = "none";
+  const parentNode = document.getElementById("food-items");
+  parentNode.innerText = "";
 }
 
-function removePreviousItems(){
-    document.getElementById('ingredient-section').innerText = "";
-    const notFoundDiv = document.getElementById("not-found-div");
-    notFoundDiv.style.display = 'none';
-    const parentNode = document.getElementById('food-items');
-    parentNode.innerText = "";
-} 
+const ingredientInfo = (id) => {
+  document.getElementById("ingredient-section").innerText = "";
 
-// ingredients item show
-const getIngredientsAndMeasure = id => {
-    document.getElementById('ingredient-section').innerText = "";
+  fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
+    .then((response) => response.json())
+    .then((data) => {
+      const meal = data.meals[0];
+      const foods = Object.keys(meal);
+      const strIngredientArray = [];
+      const strMeasureArray = [];
+      foods.forEach((element) => {
+        if (
+          element.startsWith("strIngredient") &&
+          meal[element] != null &&
+          meal[element] != ""
+        ) {
+          strIngredientArray.push(meal[element]);
+        }
+      });
 
-    fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
-    .then(response => response.json())
-    .then(data => {
-        const meal = data.meals[0];
-        const myMeal = data.meals[0] ;
-        const keys = Object.keys(myMeal);
+      foods.forEach((element) => {
+        if (
+          element.startsWith("strMeasure") &&
+          meal[element] != " " &&
+          meal[element] != "" &&
+          meal[element] != null
+        ) {
+          strMeasureArray.push(meal[element]);
+        }
+      });
 
-        const ingredientsArray = [];
-        const measureArray = [];
-        keys.forEach(key => {
-            
-            if (key.startsWith('strIngredient')  && myMeal[key] != null && myMeal[key] != "" ) {
+      const showIngredientsSection = document.getElementById(
+        "ingredient-section");
+      const ingredientItem = document.createElement("div");
 
-                ingredientsArray.push(myMeal[key])
-            }
-        });
-        
-        keys.forEach(key => {
-            
-            if (key.startsWith('strMeasure') && myMeal[key] != "" && myMeal[key] != null && myMeal[key] != " " ) {
-
-                measureArray.push(myMeal[key])
-            }
-        });
-
-        console.log(ingredientsArray);
-        console.log(measureArray);
-
-        const showIngredientsSection = document.getElementById('ingredient-section');
-        const ingredientItem = document.createElement('div')
-
-        const card = `
-        <div class="row d-flex justify-content-centerd-flex justify-content-center">
-              <div class="col-md-5 informations">
-                  <div class="info-image">
-                      <img src="${meal.strMealThumb}" width="100%" alt="">
-                  </div>
-                  
-                  <h1>${meal.strMeal}</h1><br>
-                  <h5 >Ingredients</h5><br>
-
-                  <div id="ingredient">
-                  
-                        <p><i class="fa fa-check-square tick-icon" aria-hidden="true"></i> TEST </p>
-
+      const informationHtml = `
+        <div class="row d-flex justify-content-center-flex justify-content-center">
+                <div class="col-md-5 informations">
+                    <div class="info-image">
+                        <img src="${meal.strMealThumb}" width="100%" alt="">
                     </div>
                   
-              </div>
-
-              
-
-          </div>
+                        <h1>${meal.strMeal}</h1><br>
+                        <h5 >Ingredients</h5><br>
+                    <div id="ingredient-list">
+                  
+                    </div>                  
+                </div>
+         </div>
     
-    
-    
-        `
-        ingredientItem.innerHTML = card;
-        showIngredientsSection.appendChild(ingredientItem);
+        `;
+      ingredientItem.innerHTML = informationHtml;
+      showIngredientsSection.appendChild(ingredientItem);
 
+      const ingredientList = document.getElementById("ingredient-list");
+      let ingredientInformations = " ";
 
-        const ingredientList = document.getElementById('ingredient');
-        let ingredientCard = ``;
+      strIngredientArray.forEach((ingredient, index) => {
+        const measure = strMeasureArray[index];
+        console.log(measure, ingredient);
 
-        ingredientsArray.forEach((ingredient , index) => {
-            const measure = measureArray[index];
-            console.log(measure, ingredient);
-
-            ingredientCard += `
+        ingredientInformations += `
             <p><i class="fa fa-check-square tick-icon" aria-hidden="true"></i> ${measure} ${ingredient} </p>
+            `;
+      });
 
-            `
-              
-        });
+      ingredientList.innerHTML = ingredientInformations;
+    });
+};
 
-        ingredientList.innerHTML = ingredientCard;
-
-        console.log(ingredientCard);
-        
-
-
-    })
-}
-
-// getIngredientsAndMeasure(52771);
 
