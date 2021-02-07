@@ -1,6 +1,9 @@
+.tick-icon{
+    color: green;
+}
+
 .input-form{
     font-family: FontAwesome;
-
 }
 
 .nav-ancor{
@@ -8,10 +11,8 @@
     font-size: 16px;
     
 }
-.tick-icon{
-    color: tomato;
-}
-.informations{
+
+.info{
     border: 1px solid goldenrod;
     border-radius: 10px;
     margin-bottom: 50px;
@@ -19,7 +20,7 @@
     height: 40%;
 }
 
-.informations h1,.informations h5,.informations p{
+.info h1,.info h5,.info p{
 margin: 0px;
 }
 .info-image{
@@ -28,15 +29,13 @@ margin: 0px;
     width: 100%;
     border-radius: 10px;
 }
-.item-collums{
+.item-colum{
     margin-bottom: 50px;
     border-radius: 10px;
     
 }
 .food-title{
-    height: 40px;
-    
-    
+    height: 35px;    
 }
 .card img{
     height: 180px;

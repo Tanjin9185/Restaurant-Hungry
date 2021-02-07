@@ -20,7 +20,7 @@ const searchFoodItems = (items) => {
       const itemImg = item.strMealThumb;
       const itemId = item.idMeal;
       const mealItemDiv = document.createElement("div");
-      mealItemDiv.className = "col-md-3 item-collums";
+      mealItemDiv.className = "col-md-3 item-colum";
 
       let foodHtml = `
                     <div onclick="ingredientInfo(${itemId})" class="card rounded-3 border-0" >
@@ -92,7 +92,7 @@ const ingredientInfo = (id) => {
 
       const informationHtml = `
         <div class="row d-flex justify-content-center-flex justify-content-center">
-                <div class="col-md-5 informations">
+                <div class="col-md-5 info">
                     <div class="info-image">
                         <img src="${meal.strMealThumb}" width="100%" alt="">
                     </div>
@@ -110,18 +110,18 @@ const ingredientInfo = (id) => {
       showIngredientsSection.appendChild(ingredientItem);
 
       const ingredientList = document.getElementById("ingredient-list");
-      let ingredientInformations = " ";
+      let ingredientInfo = " ";
 
       strIngredientArray.forEach((ingredient, index) => {
         const measure = strMeasureArray[index];
         console.log(measure, ingredient);
 
-        ingredientInformations += `
+        ingredientInfo += `
             <p><i class="fa fa-check-square tick-icon" aria-hidden="true"></i> ${measure} ${ingredient} </p>
             `;
       });
 
-      ingredientList.innerHTML = ingredientInformations;
+      ingredientList.innerHTML = ingredientInfo;
     });
 };
 
