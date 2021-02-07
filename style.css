@@ -1,0 +1,12 @@
+#foods{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 30px;
+}
+.food{
+    border: 1px solid goldenrod;
+    border-radius: 20px;
+    padding: 10px;
+    text-align: center;
+    width: 200px;
+}
